@@ -1,0 +1,14 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+  <h2>Pleace enter your login and password</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign InN</button>
+  </form>
+  <p>
+    Желаете подключить двухфакторную аутентификацию?
+    <a href="{% url 'gogl:otp_setup' %}">Setup NOW</a>
+  </p>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+  <h2>Setup two-factor authentication</h2>
+  <p>
+    Чтобы настроить двухфакторную аутентификацию выполните следующие шаги:
+  </p>
+  <ol>
+    <li>
+      В приложении выберите добавить учетную запись и выберите Time-based
+      One-time Password TOTP
+    </li>
+    <li>
+      Отсканируйте секретный ключ в приложении
+      <div>
+        <code>{{ otp_secret_key }}</code>
+      </div>
+      Alternatively вы можете ввести секретный ключ вручную
+    </li>
+    <li>
+      Введите код аутентификации в форму ниже
+    </li>
+  </ol>
+
+  <form method="post" action="{% url 'gogl:otp_verify' %}">
+    {% csrf_token %}
+    <label for="otp_code">Код аутентификации:</label>
+    <input type="text" id="otp_code" name="otp_code" required>
+    <button type="submit">Подтвердить</button>
+  </form>
+{% endblock %}
